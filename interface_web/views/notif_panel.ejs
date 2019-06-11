@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../CSS/style_notif_panel.css">
+    <title>Fort'house - Notification Panel</title>
+    <meta name='viewport' content="width = width.device, initial-scale = 1.0">
+</head>
+
+<body>
+
+    <div id="menuBtn">
+        <svg viewbox="0 0 100 100">
+            <polygon points="50 2 7 26 7 74 50 98 93 74 93 26" fill="none" stroke-width="4" stroke="#585247" stroke-dasharray="0,0,300"/>
+        </svg>
+        <span></span>
+    </div>
+
+    <div id='panels'>
+
+        <div id='notif_panel_overall'>
+            <h1>NOTIFICATION PANEL - OVERALL</h1>
+
+            <div class='table_content'>
+            <table>
+            <% for(var i = 0; i<database.length; i++){ %>
+                <tr >
+                    <td><%=database[i]['date']%></td>
+                    <td><%=database[i]['message']%></td>
+                </tr>
+            <% }%>
+            </table>  
+            </div>
+
+        </div>
+
+        
+        <div id='notif_panel_query'>
+            <h1>NOTIFICATION PANEL - QUERY</h1>
+
+            <div class='table_content'>
+            <table id="result_table">
+                <!-- things will come in-->
+            </table>
+
+            <form id='date_submit'>
+                <input id='datefield' type="date" name="query" max="1979-12-31">
+                <input id='queryButton' type="submit" value="Search Notifications">
+            </form>
+            </div>
+
+        </div>
+    
+    </div>
+
+    <img id="img_surveillance" src="" alt="">
+    
+    
+    <script>
+	
+	//automatic refresh
+	setTimeout("location.reload(true);", 10000); <!-- milisec -->
+	
+        var img = document.getElementById('img_surveillance');
+	var src = "";
+        // picture monitoring
+	<% var index_last_picture = 0; %>
+	<% for(var i = 0; i<database.length; i++){ %>
+                if ("<%=database[i]['message']%>".indexOf("porte") != -1)
+			img.src = '/CAM_PHOTO/PORTE_' + "<%=database[i]['date']%>.jpg";
+        <% }%>
+
+        // chat setting (automated scrolled down)
+        function down_scroll(){
+            var table_array = document.getElementsByClassName('table_content');
+            for(var i = 0; i < table_array.length; i++){
+                table_array[i].scrollTop = table_array[i].scrollHeight;
+            }
+        }
+
+        down_scroll(); // at each reload of the page
+
+        // menu button
+
+        menu_button = document.getElementById('menuBtn');
+        menu_button.addEventListener('click', (e) => {
+            window.open("http://forthouse.insa","_self");
+        })
+        
+        //make the max date on the date form to : today
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        } 
+        if(mm<10){
+            mm='0'+mm
+        } 
+        today = yyyy+'-'+mm+'-'+dd;
+        document.getElementById("datefield").setAttribute("max", today);
+
+        // handling query
+        var notif_database = []; // array containing all the notif dates, easier to manipulate
+        var query_array = []; // array containing the result of the query (selected dates)
+
+        <% for(var i = 0; i<database.length; i++){ %>
+                notif_database.push("<%=database[i]['date']%>");
+        <% }%>
+
+        var queryField = document.getElementById('datefield');
+        var query_button = document.getElementById('queryButton');
+        var test;
+        query_button.addEventListener('click', (e) => {
+            
+            query_array = []; //reset the query because of push() method   
+            <% for(var i = 0; i<database.length; i++){ %>
+                var toCompare = notif_database[<%=i%>].substring(0, notif_database[<%=i%>].indexOf(' '));
+                if (toCompare == queryField.value)
+                    query_array[<%=i%>] = "<%=database[i]['date']%>" + " : " + "<%=database[i]['message']%>"; 
+                
+            <% }%>
+            if (document.querySelectorAll('.query_message') != []){ //check if the table is not empty
+                //delete all the entry of the panel
+                var arrayToDelete = document.querySelectorAll('.query_message');
+                console.log(arrayToDelete);
+                arrayToDelete.forEach(element => {
+                    element.parentNode.removeChild(element);
+                });
+                query_array.forEach(element => {
+                    //include all the new message query into the array
+                    var trToInclude = document.createElement('tr');
+                    var tdToInclude = document.createElement('td');
+                    tdToInclude.innerText = element;
+                    tdToInclude.setAttribute("class", "query_message");
+                    trToInclude.appendChild(tdToInclude);
+                    document.getElementById('result_table').appendChild(trToInclude);
+                });
+            }
+            else { // table is empty !
+                //include all the new message query into the array7
+                var trToInclude = document.createElement(tr);
+                var tdToInclude = document.createElement(td);
+                tdToInclude.innerText = element;
+                tdToInclude.setAttribute("class", "query_message");
+                trToInclude.appendChild(tdToInclude);
+                document.getElementById('result_table').appendChild(trToInclude);
+            }
+            down_scroll(); // set the scroll at the last notification query
+            e.preventDefault(); //preventing from reload and then screwing off all the process
+        });
+        
+    </script>
+</body>
+</html>

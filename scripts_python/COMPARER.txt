@@ -1,0 +1,46 @@
+import math
+import matplotlib.pyplot as pyplot
+def comparer(schemeToCompare, invite_schema, N_MESURE, cas='client'):
+    """using normalized correlation on descrete signals to compare 2 schemes"""
+    """ renvoie le degre de similitude entre les 2 schemas """
+    tab_to_compare = []
+    max_to_compare = max(schemeToCompare)
+    max_invite_schema = max(invite_schema)
+    
+    for i in range(50):
+        if schemeToCompare[i] > 0 and schemeToCompare[i] < max_to_compare/2:
+            tab_to_compare.append(1)
+        elif schemeToCompare[i] > max_to_compare/2 and schemeToCompare[i] < max_to_compare:
+            tab_to_compare.append(2)
+
+        else:
+            tab_to_compare.append(0)
+    tab_invite = []
+    for i in range(50):
+        if invite_schema[i] > 0 and  invite_schema[i] < max_invite_schema/2:
+            tab_invite.append(1)
+        elif invite_schema[i] > max_invite_schema/2 and  invite_schema[i] < max_invite_schema:
+            tab_invite.append(2)
+
+        else:
+            tab_invite.append(0)
+    if cas == 'client':
+        print 'TAB TO COMPARE : \n',tab_to_compare
+        print 'TAB USER : \n',tab_invite
+    moy_correlation_M = 0
+    moy_correlation_N = 0
+    correlation = 0
+    for k in range(N_MESURE):
+        correlation += (tab_to_compare[k]*tab_invite[k])
+        moy_correlation_M += math.pow(tab_invite[k], 2) 
+        moy_correlation_N += math.pow(tab_to_compare[k],2)
+    norm_correlation_denominateur = math.sqrt(moy_correlation_M * moy_correlation_N)
+    norm_correlation = correlation / norm_correlation_denominateur #value between 0 and 1
+    
+    
+    return norm_correlation
+
+
+
+
+

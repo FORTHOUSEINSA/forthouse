@@ -1,0 +1,156 @@
+body {
+    background: rgba(30,37,48);
+
+}
+
+#main{
+    display:flex;
+    flex-direction:row;
+    width:100%;
+    justify-content:space-between;
+}
+    
+aside{
+  padding:2%;
+  color:white;
+  margin:auto;
+  margin-left: 2%;
+  font-family: 'Staatliches', cursive;
+  width:30%;  
+/*float:right;
+  position:relative;
+  bottom:50vh;*/
+
+} 
+
+article{
+
+  width:80%;
+
+}
+
+input[type=text], input[type=email] {
+    /*width: 30%;*/
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit]{
+    /*width: 30%;*/
+    background-color: #ddd;
+    color: #000;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button > a{
+    text-decoration: none;
+    
+}
+
+button {
+    /*width:20%;
+    position: relative;*/
+
+}
+
+p {
+    color: #585247;
+    font-size: 2.4em;
+}
+
+#scheme {
+   /*
+    max-width : 50%;
+    max-height:45%;
+    position: relative;
+    left:25%; */
+}
+
+#circle
+{
+border-radius:50% 50% 50% 50%;  
+width:40vh;
+height:15vw;
+/*
+position: relative;
+left:80%;
+top:80%;*/
+}
+
+/* BUTTON MENU REDIRECT */
+ 
+#menuBtn {
+    position: relative;
+    top: 15px;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    z-index: 2;
+    will-change: transform;
+    float:top;
+  }
+  #menuBtn svg {
+    display: block;
+  }
+  #menuBtn:hover svg polygon {
+    -webkit-animation: hexHover 0.7s;
+            animation: hexHover 0.7s;
+  }
+  #menuBtn span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    padding: 8px 0;
+    background-clip: content-box;
+    background-color: #585247;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+ transform: translate(-50%, -50%);
+    -webkit-transition: background-color 0.5s;
+            transition: background-color 0.5s;
+  }
+  #menuBtn span:before, #menuBtn span:after {
+    position: absolute;
+    background-color: #585247;
+    content: '';
+    width: 20px;
+    height: 2px;
+    -webkit-transition: -webkit-transform 0.5s;
+            transition: transform 0.5s;
+  }
+  #menuBtn span:before {
+    top: 0;
+  }
+  #menuBtn span:after {
+    bottom: 0px;
+  }
+  
+  @-webkit-keyframes hexHover {
+    0% {
+      stroke-dasharray: 0,0,300;
+    }
+    10% {
+      stroke-dasharray: 0,20,300;
+    }
+ 100% {
+      stroke-dasharray: 300,20,300;
+    }
+  }
+  
+@media screen and (max-width:1000px){
+
+    #main{
+	flex-direction:column;
+     }
+}

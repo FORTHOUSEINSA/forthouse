@@ -1,0 +1,121 @@
+body {
+    background: rgba(30,37,48);
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+section{
+    background-image:url("../IMG/selfie_projo.png");
+    background-attachment: fixed;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 100%;
+    padding:2.5%;
+    margin-top: 3%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    word-wrap: break-word;
+  }
+
+
+  article{
+    font-family: cursive;
+    font-size: 1.5em;
+    float: right;
+    flex:3;
+  }
+  
+  aside{
+    flex:1;
+    background-image: url('../IMG/aled_projo.jpg');
+    background-repeat: repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding:2%;
+    margin:auto;
+    margin-left: 2%;
+    text-align: center;
+    font-size: 120%;
+    font-family: 'Staatliches', cursive;
+    color: black;
+    word-wrap: break-word;
+    
+  
+  }
+  
+/** MENU BUTTON ******************************************/
+#menuBtn {
+    position: relative;
+    top: 15px;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    z-index: 2;
+    will-change: transform
+  }
+
+  #menuBtn svg {
+    display: block;
+  }
+  #menuBtn:hover svg polygon {
+    -webkit-animation: hexHover 0.7s;
+            animation: hexHover 0.7s;
+  }
+  #menuBtn span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    padding: 8px 0;
+    background-clip: content-box;
+    background-color: #585247;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    -webkit-transition: background-color 0.5s;
+            transition: background-color 0.5s;
+  }
+  #menuBtn span:before, #menuBtn span:after {
+    position: absolute;
+    background-color: #585247;
+    content: '';
+    width: 20px;
+    height: 2px;
+    -webkit-transition: -webkit-transform 0.5s;
+            transition: transform 0.5s;
+  }
+  #menuBtn span:before {
+    top: 0;
+  }
+  #menuBtn span:after {
+    bottom: 0px;
+  }
+  
+  @-webkit-keyframes hexHover {
+    0% {
+      stroke-dasharray: 0,0,300;
+    }
+    10% {
+      stroke-dasharray: 0,20,300;
+    }
+    100% {
+      stroke-dasharray: 300,20,300;
+    }
+  }
+  
+  @keyframes hexHover {
+    0% {
+      stroke-dasharray: 0,0,300;
+    }
+    10% {
+      stroke-dasharray: 0,20,300;
+    }
+    100% {
+      stroke-dasharray: 300,20,300;
+    }
+  }
+  

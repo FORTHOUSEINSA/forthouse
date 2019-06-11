@@ -1,0 +1,7 @@
+import RPi.GPIO as GPIO
+GPIO.setup(18,GPIO.OUT)
+
+pwm=GPIO.PWM(18,50)
+pwm.start(10) #full left position
+reset_chrono_locket = True
+

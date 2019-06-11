@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../CSS/style_mon_compte.css"> <!-- place him directly in the public dir-->
+    <!-- Chartjs settings -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <title>Fort'House - Mon Compte</title>
+    <meta name="viewport" content="width=device-width, initial-scale= 1.0">
+</head>
+
+<body>
+    
+
+    <!--    BUTTON MENU REDIRECT   -->
+
+
+    <header>
+        <div id="menuBtn">
+                <svg viewbox="0 0 100 100">
+                    <polygon points="50 2 7 26 7 74 50 98 93 74 93 26" fill="none" stroke-width="4" stroke="#585247" stroke-dasharray="0,0,300"/>
+                </svg>
+                <span></span>
+            </div>
+    </header>
+    
+    <div id = "main">
+    <article>
+        <canvas id="scheme"></canvas>
+    </article>
+    
+    <aside>
+
+    <p>Prénom : <%=admin['prenom']%> <br>
+    Nom : <%=admin['nom']%> <br>
+    E-mail : <%=admin['email']%></p>
+
+    <form id='formulaire' action='http://127.0.0.1:8085/edit/' method ='post'>
+        <input type="text" id = 'firstname' name="prenom" placeholder="Enter a first name">
+        <input type="text" id = 'lastname' name="nom" placeholder="Enter a family name">
+        <input type="email" name="email" placeholder="Enter an email adress">
+        <input type="submit" id='submit_button' value="Editer Nom/Prénom/Mail">
+    </form>
+
+    <button id='changeScheme'><a href='http://127.0.0.1:8085/scheme/'>Changer de schema</a></button>
+
+    
+    </aside>
+
+    <img id='circle' src="/IMG/insa_cvl_logo.jpg" alt="">
+    
+    </div>
+
+    <script>
+        menu_button = document.getElementById('menuBtn');
+        menu_button.addEventListener('click', (e) => {
+            window.open("http://forthouse.insa","_self")
+        })
+
+        // schemes visualisation
+        var voltageChart;
+        N_MESURE = 50;
+        abcisse = []
+        for(var i = 0; i < N_MESURE; i++){
+            abcisse.push(i+1);
+        }
+        schema = document.getElementById('scheme');
+        var myChart = schema.getContext('2d');
+        voltageChart = new Chart(myChart, {
+        type:'line',
+        data:{
+        labels:abcisse,
+        datasets:[{
+          label:'Voltage',
+          data:[<%=admin['schema']%>],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{}
+    });
+
+    </script>
+</body>
+</html>

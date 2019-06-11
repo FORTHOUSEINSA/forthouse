@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,800' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="../CSS/style_menu.css">
+  <title>Fort'House - Gateway</title>
+  <meta name="viewport" content="width=device-width, initial-scale= 1.0">
+</head>
+<body>
+  <h1>Fort'House</h1>
+  <img id='logo' src="../IMG/logo_fort'house.jpg" alt="logo du projet">
+  <nav id="hexNav">
+  <div id="menuBtn">
+    <svg viewbox="0 0 100 100">
+      <polygon points="50 2 7 26 7 74 50 98 93 74 93 26" fill="none" stroke-width="4" stroke="#585247" stroke-dasharray="0,0,300"/>
+    </svg>
+    <span></span>
+  </div>
+  <ul id="hex">
+    <li class="tr"><div class="clip"><a href="/notifications/" class="content">
+      <img src="../IMG/hourglass.jpeg" alt="" />
+      <h2 class="title"></h2><p></p>
+    </a></div></li>
+    <li class="tr"><div class="clip"><a href="/database/" class="content">
+      <img src="../IMG/database.png" alt="" />
+      <h2 class="title"></h2><p></p>
+    </a></div></li>
+    <li class="tr"></li>
+    <li class="tr"></li>
+    <li class="tr"><div class="clip"><a href="/mon_compte/" class="content">
+      <img src="../IMG/people.jpg" alt="" />
+      <h2 class="title"></h2><p></p>
+    </a></div></li>
+    <li class="tr"><div class="clip"><a href="/about_us/" class="content">
+      <img src="../IMG/about_us.jpg" alt="" />
+      <h2 class="title"></h2><p></p>
+    </a></div></li>
+  </ul>
+</nav>
+<script type="text/javascript">
+  var hexNav = document.getElementById('hexNav');
+
+    document.getElementById('menuBtn').onclick = function() {
+    var className = ' ' + hexNav.className + ' ';
+    if ( ~className.indexOf(' active ') ) {
+        hexNav.className = className.replace(' active ', ' ');
+    } else {
+        hexNav.className += ' active';
+    }              
+}
+</script>
+</body>
+</html>

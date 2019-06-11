@@ -1,0 +1,87 @@
+.<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/CSS/style_database.css"> <!-- place him directly in the public dir-->
+    <!-- go to the top button settings -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"> 
+    <!-- Chartjs settings -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <title>Fort'House - User Interface</title>
+    <meta name="viewport" content="width = width.device" initial-scale=1.0">
+</head>
+
+<body>
+    
+    <!--    BUTTON MENU REDIRECT   -->
+    <div id="menuBtn">
+        <svg viewbox="0 0 100 100">
+            <polygon points="50 2 7 26 7 74 50 98 93 74 93 26" fill="none" stroke-width="4" stroke="#585247" stroke-dasharray="0,0,300"/>
+        </svg>
+        <span></span>
+    </div>
+
+    <div id='main'>
+    <h1>Fort'House - User Interface</h1>
+    
+    <div id='data_base'>
+        <table>
+        <% for(var i = 0; i<database.length; i++){ %>
+            <tr >
+                <td><%=database[i]['firstname']%></td>
+                <td><%=database[i]['lastname']%></td>
+                <td><canvas class="scheme" width="200" height="200"></canvas></td>
+                <td>
+                <button><a href='http://127.0.0.1:8082/launch_script/<%=i%>'>Launch Acqusition</a></button>
+                </td>
+                <td><a href="http://127.0.0.1:8082/delete_entry/<%=i%>"><img src="./IMG/delete_button.png" alt="delete button"></a></td>
+            </tr>
+        <% }%>
+        </table>
+    
+    	<form id='formulaire' action='http://127.0.0.1:8082/add_entry/' method ='post'>
+        	<input type="text" id = 'firstname' name="firstname" placeholder="Enter a first name">
+        	<input type="text" id = 'lastname' name="lastname" placeholder="Enter a family name">
+        	<input type="submit" id='submit_button' value="Submit to Database">
+    	</form>
+
+    </div>
+
+    </div>
+    <a class="gotopbtn" href="#"> <i class="fas fa-arrow-up"></i> </a>
+
+    <script>
+        menu_button = document.getElementById('menuBtn');
+        menu_button.addEventListener('click', (e) => {
+            window.open("http://forthouse.insa","_self")
+        })
+
+        // schemes visualisation
+        var voltageChart;
+        N_MESURE = 50;
+        abcisse = []
+        for(var i = 0; i < N_MESURE; i++){
+            abcisse.push(i+1);
+        }
+        schemes = document.getElementsByClassName('scheme');
+        <% for(var i = 0; i < database.length; i++){ %>
+            var myChart = schemes[<%=i%>].getContext('2d');
+            voltageChart = new Chart(myChart, {
+      type:'line',
+      data:{
+        labels:abcisse,
+        datasets:[{
+          label:'Voltage',
+          data:[<%=database[i]['schema']%>],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{}
+    });
+        <% } %>
+    </script>
+</body>
+</html>

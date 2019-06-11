@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fort'house - About Us</title>
+    <link rel="stylesheet" href="../CSS/style_about_us.css">
+    <meta name="viewport" content="width=device-width, initial-scale= 1.0">
+</head>
+
+<body>
+    <div id="menuBtn">
+            <svg viewbox="0 0 100 100">
+                <polygon points="50 2 7 26 7 74 50 98 93 74 93 26" fill="none" stroke-width="4" stroke="#585247" stroke-dasharray="0,0,300"/>
+            </svg>
+            <span></span>
+    </div>
+              
+    <section>
+
+            <article>
+              <h1 style="font-size:2.5em;">About us</h1>
+            Fort'house est un système de domotique orienté sécurité, avec une phase d'authentification <br>
+            et une phase d'action (notamment avec un moteur faisant office de loquet) !
+      
+            </article>
+      
+            <aside>
+              <h1 style="font-size:1.5em;">L'équipe</h1>
+                <img style='width:300px; height:200px;' src='../IMG/insa_cvl_logo.jpg'>
+              <p> <span id="quote">
+                La team au grand complet !</span> <br> <br>
+                <ul style='list-style-type: none;'>
+                  <li>MELLIER Clément - respo bouffe, ambiance et partie théorie</li>
+                  <br>
+                  <li>PEYRETAILLADE Théo - respo CAO + imprimante 3D</li>
+                  <br>
+                  <li>PICAUD Flavian - respo electrocinétique + tout car McGiver </li>
+                  <br>
+                  <li>BEZIAUD Jordan - respo programmation + orga</li>
+                  <br>
+                </ul>
+                
+              </p>
+
+            </aside>
+      
+          </section>
+
+    <script>
+        menu_button = document.getElementById('menuBtn');
+        menu_button.addEventListener('click', (e) => {
+            window.open("http://forthouse.insa","_self")
+        })
+    </script>
+</body>
+</html>
