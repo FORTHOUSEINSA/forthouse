@@ -1,0 +1,48 @@
+
+    server {
+
+        listen 80;
+        listen [::]:80;
+        server_name  forthouse.insa;
+        root         /home/spicytelescope/DATA/PERSO/PROG_ALGO/INSA_PROJET_1A/interface_web/;
+
+        location / {
+            proxy_pass http://10.188.230.132:8081/; # menu.js nodejs server
+            proxy_redirect http:// $scheme://;
+	   }
+
+        location /database/ {
+           
+            proxy_pass http://10.188.230.132:8082/;
+	        proxy_redirect http:// $scheme://;
+	            
+        }
+
+        location /notifications/ {
+           
+	        proxy_pass http://10.188.230.132:8083/;
+            proxy_redirect http:// $scheme://;        
+        }
+
+        location /about_us/ {
+
+            proxy_pass http://10.188.230.132:8084/;
+            proxy_redirect http:// $scheme://;    
+
+        }
+
+        location /mon_compte/ {
+        	proxy_pass http://10.188.230.132:8085/;
+        	proxy_redirect http:// $scheme://;    
+
+        }
+        error_page 404 /404.html;
+        location = /40x.html {
+        }
+
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+        }
+
+        }
+
